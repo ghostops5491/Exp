@@ -1,0 +1,17 @@
+# Apple Developer
+apple_id "devops@agiledevops.io"
+
+# Team
+team_id "P9MWD79729"
+team_name "Jonny On It, LLC"
+
+# AppId for JonnyPro
+#app_identifier "org.reactjs.native.jonnyOnItContractor.Demo"
+
+# AppId for JonnyOnIt
+app_identifier "org.reactjs.native.jonnyOnItCustomer.Demo"
+
+# Google Json File Key
+json_key_file "fastlane/google_play_key.json"
+
+package_name "com.jonnyonitcustomer"

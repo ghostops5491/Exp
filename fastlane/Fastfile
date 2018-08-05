@@ -1,0 +1,167 @@
+default_platform :ios
+
+platform :ios do
+  #Config global variables
+  app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+  app_name = "jonnyOnItCustomer" #Should match .xcodeproj file name
+  team_name = CredentialsManager::AppfileConfig.try_fetch_value(:team_name)
+  team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+
+  # Access to Apple Developer and create required Certificates and Provisioning Profiles
+  lane :get_dev_cert_and_profile do
+    cert(development: true)
+    sigh(development: true, force: true)
+  end
+
+  lane :get_release_cert_and_profile do
+    cert()
+    sigh()
+  end
+
+  lane :build_release do
+    #xcode_select("/Applications/Xcode9.2.app")
+    get_dev_cert_and_profile
+    get_release_cert_and_profile
+    gym(
+      project: "ios/" + app_name + ".xcodeproj",
+      scheme: app_name,
+      clean: true,
+      output_directory: "ios/build",
+      output_name: app_name + ".ipa",
+      export_method: "app-store",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: {
+          app_identifier => "AppStore_" + app_identifier,
+        },
+      },
+    )
+  end
+
+  lane :build_staging do
+    #xcode_select("/Applications/Xcode9.2.app")
+    get_release_cert_and_profile
+    get_dev_cert_and_profile
+    gym(
+      project: "ios/" + app_name + ".xcodeproj",
+      scheme: app_name,
+      clean: true,
+      output_directory: "ios/build",
+      output_name: app_name + ".ipa",
+      export_method: "development",
+      export_options: {
+        method: "development",
+        provisioningProfiles: {
+          app_identifier => "Development_" + app_identifier,
+        },
+      },
+    )
+  end
+
+  lane :compile do
+    #xcode_select("/Applications/Xcode9.2.app")
+    xcodebuild(
+      project: "ios/" + app_name + ".xcodeproj",
+      scheme: app_name,
+      configuration: "Debug",
+      clean: true,
+      build: true,
+      destination: "generic/platform=iOS",
+      build_settings: {
+        "CODE_SIGNING_REQUIRED" => "NO",
+        "CODE_SIGN_IDENTITY" => "",
+      },
+    )
+  end
+
+  # Increase version and build number
+  lane :increment do |options|
+    if options[:version_number].nil? || options[:version_number].empty?
+      version_number = "1.0"
+    else
+      version_number = options[:version_number]
+    end
+    tags = version_number.split(".")
+    optimize_build_number = tags[0].to_i * 10000 + tags[1].to_i * 1000 + options[:build_number].to_i
+    increment_version_number(
+      version_number: version_number + "." + options[:build_number], # Set a specific version number
+      xcodeproj: "ios/" + app_name + ".xcodeproj",
+    )
+    increment_build_number(
+      build_number: optimize_build_number, # set a specific number
+      xcodeproj: "ios/" + app_name + ".xcodeproj",
+    )
+  end
+
+  # Create an app on App Store Connect
+  lane :create_app do
+    produce(
+      app_identifier: app_identifier,
+      app_name: "Jonny On It",
+      language: "English",
+      app_version: "1.0",
+      sku: app_identifier,
+      team_name: team_name, # only necessary when in multiple teams
+      team_id: team_id, # only necessary when in multiple teams
+      # Optional
+      # App services can be enabled during app creation
+      enable_services: {
+        push_notification: "on",       # Valid values: "on", "off"
+      },
+    )
+  end
+
+  lane :deliver_app do |values|
+    submit_for_review = values[:submit_for_review]
+    reject_if_possible = values[:reject_if_possible]
+    automatic_release = values[:automatic_release]
+    deliver(
+      ipa: "ios/build/" + app_name + ".ipa",
+      skip_screenshots: true,
+      price_tier: 0,
+      app_rating_config_path: "fastlane/rating_config.json",
+      force: true,
+      team_id: team_id, # only necessary when in multiple teams
+      team_name: team_name, # only necessary when in multiple teams
+      app_review_information: {
+        first_name: "Lucy",
+        last_name: "Arnold",
+        phone_number: "6467122513",
+        email_address: "lucy.arnold@jonnyonit.com",
+        demo_user: "itunes_customer@testing.com",
+        demo_password: "apple123",
+        notes: "This is not required; you can create any username and password and it will allow you into the app.  The customer must however enter valid credit card details to be able to request a service (e.g. to move past the customer profile editing page)",
+      },
+      submit_for_review: submit_for_review,
+      reject_if_possible: reject_if_possible,
+      automatic_release: automatic_release,
+    )
+  end
+
+  lane :submit_beta do
+    #create_app  # have already created
+    deliver_app(
+      submit_for_review: false,
+      reject_if_possible: false,
+      automatic_release: false,
+    )
+  end
+
+  lane :submit_release do
+    #create_app  # have already created
+    deliver_app(
+      submit_for_review: true,
+      reject_if_possible: true,
+      automatic_release: true, # Whether wants to automatically release or not
+    )
+  end
+end
+
+platform :android do
+  lane :submit_beta do |options|
+    supply(
+      apk: "android/app/build/" + options[:filename] + ".apk",
+      track: options[:track],
+    )
+  end
+end
