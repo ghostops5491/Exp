@@ -9,17 +9,20 @@ export default StyleSheet.create({
     backgroundColor: "#fcfcfc",
     justifyContent: 'space-around',
     marginBottom: getResponsiveCSSFrom8(5).height,
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: {
-      width: getResponsiveCSSFrom8(0).width,
-      height: getResponsiveCSSFrom8(1).height,
-    },
-    shadowRadius: getResponsiveCSSFrom8(1).width,
-    shadowOpacity: 1,
+    // marginTop: 10,
+    shadowColor: "rgba(0, 0, 0, 0.2)",
+  	shadowOffset: {
+ width: getResponsiveCSSFrom8(0).width,
+ height: getResponsiveCSSFrom8(1).height,
+  	},
+ shadowRadius: getResponsiveCSSFrom8(1).width,
+  	shadowOpacity: 1,
   },
   innerBody: {
     width: '100%',
-    height: getResponsiveCSSFrom8(50).height
+    height: getResponsiveCSSFrom8(50).height,
+    paddingTop: getResponsiveCSSFrom8(10).height,
+    paddingBottom: getResponsiveCSSFrom8(10).height,
   },
   logoContainer: {
     width: getResponsiveCSSFrom8(150).width,

@@ -21,7 +21,6 @@ import Actions from 'App/Redux/Actions'
 import moment from 'moment'
 import AddAddressModal from '../Profile/AddAddressModal'
 import Loader from '../../Components/Loader'
-import {ifIphoneX} from 'react-native-iphone-x-helper'
 
 const URGENCY_TYPES = {
   IMMEDIATELY: 'immediate',
@@ -314,7 +313,7 @@ class ScheduleJob extends Component {
                   />
                   <Item style={styles.item}>
                     <View style={styles.input}>
-                      <View style={{...ifIphoneX({paddingVertical: 14, paddingHorizontal: 10}, {padding: 10})}}>
+                      <Content padder>
                         <ModalDropdown
                           options={this.state.timeRange}
                           renderRow={this.renderDropdownRow}
@@ -327,7 +326,7 @@ class ScheduleJob extends Component {
                             styles.problemCategoryDropdownDropdownStyle
                           }
                         />
-                      </View>
+                      </Content>
                     </View>
                   </Item>
                 </View>
@@ -347,7 +346,7 @@ class ScheduleJob extends Component {
 
                     <Item style={styles.item}>
                       <View style={styles.input}>
-                        <View style={{...ifIphoneX({paddingVertical: 14, paddingHorizontal: 10}, {padding: 10})}}>
+                        <Content padder>
                           <ModalDropdown
                             options={this.getServiceAddresses()}
                             renderRow={this.renderDropdownRow}
@@ -362,7 +361,7 @@ class ScheduleJob extends Component {
                               styles.problemCategoryDropdownDropdownStyle
                             }
                           />
-                        </View>
+                        </Content>
                       </View>
                     </Item>
                     {
@@ -443,7 +442,6 @@ class ScheduleJob extends Component {
       </Container>
     )
   }
-
   renderDropdownRow(rowData, highlighted) {
     if (rowData) {
       return (

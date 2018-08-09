@@ -33,6 +33,7 @@ export default class CallModal extends Component {
               <View style={styles.contactModalFlow}>
                 <TouchableOpacity
                 onPress={() => Linking.openURL(callUrl)}>
+                >
                   <RenderIcon name="contact" width="35"/>
                   <Text style={styles.underLineText}>CALL</Text>
                 </TouchableOpacity>

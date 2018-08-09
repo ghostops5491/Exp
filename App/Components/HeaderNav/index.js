@@ -22,7 +22,7 @@ export default class HeaderNav extends Component {
     const { showBackButton } = this.props
     return (
       <Header style={styles.header}>
-        <Left style={{flex: 1}}>
+        <Left style={{flex: 1, }}>
           {(showBackButton && <Button transparent onPress={() => {this.goBack()}}>
             <RenderIcon name="back" width="15"/>
           </Button>)}

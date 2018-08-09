@@ -1,23 +1,18 @@
 import { StyleSheet, Platform } from 'react-native'
-import { ifIphoneX } from 'react-native-iphone-x-helper'
 import { getResponsiveCSSFrom8 } from '../../Lib/Utils'
 
 export default StyleSheet.create({
   footer: {
-    borderWidth: 0,
+   borderWidth: getResponsiveCSSFrom8(0).width,
     backgroundColor: '#fcfcfc',
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOffset: {
-      width: getResponsiveCSSFrom8(0).width,
-      height: getResponsiveCSSFrom8(-2).height
+     width: getResponsiveCSSFrom8(0).width,
+     height: getResponsiveCSSFrom8(-2).height,
     },
-    shadowRadius: getResponsiveCSSFrom8(3).width,
+   shadowRadius: getResponsiveCSSFrom8(3).width,
     shadowOpacity: 1,
-    ...ifIphoneX({
-      height: getResponsiveCSSFrom8(30).height
-    }, {
-      height: getResponsiveCSSFrom8(70).height
-    }),
+    height: getResponsiveCSSFrom8(80).height,
     flexDirection: 'row',
     flexWrap: 'nowrap',
     justifyContent: 'space-between',

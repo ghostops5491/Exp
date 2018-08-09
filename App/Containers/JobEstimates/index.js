@@ -252,7 +252,6 @@ const mapStateToProps = createStructuredSelector({
   contractor_id: (state) => get(state, 'serviceRequest.selectedProvider'),
   requestingAddPayment: (state) => get(state, 'payments.requesting'),
   accountForm: (state) => get(state, 'payments.accountForm'),
-  apiError: (state) => get(state, 'payments.error'),
   appSettings: (state) => get(state, 'payments.appSettings'),
 })
 

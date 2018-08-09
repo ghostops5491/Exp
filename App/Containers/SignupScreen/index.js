@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator } from 'react-native'
-import { Button, Text, Form, Item, Input, Icon } from 'native-base'
+import { Button, Text, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import TermsConditionsModal from 'App/Components/Modals/TermsConditionsModal'
@@ -21,9 +21,7 @@ class SignupScreen extends Component {
     super(props)
 
     this.state = {
-      termsConditionsModalVisible: false,
-      hidePassword1: true,
-      hidePassword2: true
+      termsConditionsModalVisible: false
     }
   }
 
@@ -91,6 +89,34 @@ class SignupScreen extends Component {
     return true
   }
 
+  /**
+   * addError results in 3 sideeffects
+   * 1. Its sets the state of component to false
+   * It selfs the state of component to null
+   * It sets the state of component to password
+   * 
+   * est case 1 :
+   * Inputs - passowrd -> false
+   *  SE-1
+   * Inputs - password -> null / falsy
+   *  SE-2
+   * Inputs - password -> string(password)
+   *  SE-3
+   * 
+   * Spies mocks
+   * 
+   * jest.mock(Signup.prototype, "addError", function () {
+   *   this.setState({ password: false })
+   * })
+   * fucntion () {}
+   * 
+   * const addErorSpy = jest.spy(Signup.prototype, "addError")
+   * 
+   * 1. Record calls to addError
+   * 2. Record aprameters that were passed to addERorr
+   * 3. Record return values
+   */
+
   validPasswordConfirmation() {
     const { password, passwordConfirmation, addError } = this.props
     if (isEmpty(passwordConfirmation)) {
@@ -104,14 +130,6 @@ class SignupScreen extends Component {
       return false
     }
     return true
-  }
-
-  togglePassword = (index) => {
-    if(index === 1) {
-      this.setState({hidePassword1: !this.state.hidePassword1})
-    } else {
-      this.setState({hidePassword2: !this.state.hidePassword2})
-    }
   }
 
   render() {
@@ -155,15 +173,12 @@ class SignupScreen extends Component {
                 </View>
                 <Input
                   placeholder='Password'
-                  secureTextEntry={this.state.hidePassword1}
+                  secureTextEntry={true}
                   style={passwordInputStyle}
                   value={this.props.password}
                   onChangeText={(password) =>
                     this.props.changePassword(password)}
                 />
-                <Button style={styles.rightIcon} transparent primary onPress={() => this.togglePassword(1)}>
-                  <Icon name={this.state.hidePassword1 ? 'eye' : 'eye-off'}/>
-                </Button>
               </Item>
               <Item style={styles.item}>
                 <View style={styles.icon}>
@@ -171,16 +186,13 @@ class SignupScreen extends Component {
                 </View>
                 <Input
                   placeholder='Password Confirmation'
-                  secureTextEntry={this.state.hidePassword2}
+                  secureTextEntry={true}
                   style={passwordConfirmationInputStyle}
                   value={this.props.passwordConfirmation}
                   onChangeText={(passwordConfirmation) =>
                     this.props.changePasswordConfirmation(passwordConfirmation)
                   }
                 />
-                <Button style={styles.rightIcon} transparent primary onPress={() => this.togglePassword(2)}>
-                  <Icon name={this.state.hidePassword2 ? 'eye' : 'eye-off'}/>
-                </Button>
               </Item>
               <View style={styles.activityIndicator}>
                 {this.props.signingUp &&
@@ -250,5 +262,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(Actions.changePasswordConfirmation(passwordConfirmation)),
   clearForm: (email) => dispatch(Actions.clearForm(email))
 })
+
+export const SignupScreen = SignupScreen;
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)

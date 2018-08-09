@@ -10,7 +10,7 @@ platform :ios do
   # Access to Apple Developer and create required Certificates and Provisioning Profiles
   lane :get_dev_cert_and_profile do
     cert(development: true)
-    sigh(development: true, force: true)
+    sigh(development: true)
   end
 
   lane :get_release_cert_and_profile do
@@ -19,7 +19,7 @@ platform :ios do
   end
 
   lane :build_release do
-    #xcode_select("/Applications/Xcode9.2.app")
+    xcode_select("/Applications/Xcode9.2.app")
     get_dev_cert_and_profile
     get_release_cert_and_profile
     gym(
@@ -39,7 +39,7 @@ platform :ios do
   end
 
   lane :build_staging do
-    #xcode_select("/Applications/Xcode9.2.app")
+    xcode_select("/Applications/Xcode9.2.app")
     get_release_cert_and_profile
     get_dev_cert_and_profile
     gym(
@@ -59,7 +59,7 @@ platform :ios do
   end
 
   lane :compile do
-    #xcode_select("/Applications/Xcode9.2.app")
+    xcode_select("/Applications/Xcode9.2.app")
     xcodebuild(
       project: "ios/" + app_name + ".xcodeproj",
       scheme: app_name,
@@ -74,15 +74,15 @@ platform :ios do
     )
   end
 
-  # Increase version and build number
+  # Increse version and build number
   lane :increment do |options|
     if options[:version_number].nil? || options[:version_number].empty?
-      version_number = "1.0"
+      version_number = "1.0.0"
     else
       version_number = options[:version_number]
     end
     tags = version_number.split(".")
-    optimize_build_number = tags[0].to_i * 10000 + tags[1].to_i * 1000 + options[:build_number].to_i
+    optimize_build_number = tags[0].to_i * 10000 + tags[1].to_i * 1000 + tags[2].to_i * 100 + options[:build_number].to_i
     increment_version_number(
       version_number: version_number + "." + options[:build_number], # Set a specific version number
       xcodeproj: "ios/" + app_name + ".xcodeproj",
@@ -160,7 +160,7 @@ end
 platform :android do
   lane :submit_beta do |options|
     supply(
-      apk: "android/app/build/" + options[:filename] + ".apk",
+      apk: "android/app/build/app-jenkins.apk",
       track: options[:track],
     )
   end

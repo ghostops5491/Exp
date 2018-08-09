@@ -35,7 +35,6 @@ export default StyleSheet.create({
     borderColor: Colors.grayFive,
     width: "100%",
     height: getResponsiveCSSFrom8(44).height,
-    lineHeight: getResponsiveCSSFrom8(18).height,
     fontSize: getResponsiveCSSFrom8(14).height,
     fontWeight: "400",
     fontFamily: Fonts.type.montserrat,

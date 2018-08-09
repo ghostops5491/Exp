@@ -50,6 +50,11 @@ class Notifications extends Component {
     }
   }
 
+  goToJob = (item) => {
+    this.props.setCurrentJob(item.job_id)
+    this.props.navigation.navigate("JobCompleted")
+  }
+
   confirmClearNotification = () => {
     Alert.alert(
       'Are you sure you would like to clear all of your notifications?',
@@ -89,6 +94,13 @@ class Notifications extends Component {
                     {item.service_time && <Text style={styles.date}>
                       {moment(item.service_time).fromNow()}
                     </Text>}
+                    {item.type === 'work_completed' &&
+                      <Text
+                      style={styles.unread}
+                      onPress={this.goToJob.bind(this, item)}>
+                        VIEW RECEIPT
+                      </Text>
+                    }
                   </View>
                   <View style={{ flexDirection: 'row' }}>
                     {!item.read &&

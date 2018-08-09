@@ -31,10 +31,6 @@ class JobTimeline extends Component {
     }
   }
 
-  componentWillMount() {
-    const { currentJobId } = this.props
-    this.props.fetchInvoice(currentJobId)
-  }
   getLastState() {
     const { allJobs, currentJobId } = this.props
     const currentJob = allJobs[currentJobId]
@@ -80,11 +76,6 @@ class JobTimeline extends Component {
     this.setState({
       shareModalVisible: !this.state.shareModalVisible,
     })
-  }
-
-  goToJob = (job_id) => {
-    this.props.setCurrentJob(job_id)
-    this.props.navigation.navigate("JobCompleted")
   }
 
   render () {
@@ -145,21 +136,12 @@ class JobTimeline extends Component {
 
             <View style={{flexDirection: 'column', flex: 9, minHeight: 200}}>
               <StatesTimeline
-                invoice={this.props.invoice}
                 jobStates={jobStates}
                 states={filteredStates}
                 active={this.getLastState()}
                 job={this.getCurrentJob()}
               />
             </View>
-            { this.getLastState() === 'work_completed' &&
-              <Text
-              style={styles.invoiceButton}
-              onPress={this.goToJob.bind(this, currentJob.id)}
-              >
-                VIEW RECEIPT
-              </Text>
-            }
             {showCancelButton && <View style={{flex: 0.4}}>
               <CancelButton confirmWorkCancelled={this.confirmWorkCancelled} />
               <CancelModal
@@ -183,7 +165,6 @@ class JobTimeline extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  invoice: (state) => get(state, 'invoice.current'),
   currentJobId: (state) => get(state, 'job.currentJobId'),
   allJobs: (state) => get(state, 'job.allJobs'),
   jobStates: (state) => get(state, 'job.jobStates'),
@@ -194,15 +175,10 @@ const mapDispatchToProps = (dispatch) => ({
     return new Promise((resolve, reject) =>
       dispatch(Actions.updateJobStateRequest(payload, resolve, reject)))
   },
-  fetchInvoice: (currentJobId) => {
-    return new Promise((resolve, reject) =>
-      dispatch(Actions.fetchInvoiceRequest(currentJobId, resolve, reject)))
-  },
   fetchJobs: () => {
     return new Promise((resolve, reject) =>
       dispatch(Actions.fetchJobsRequest(resolve, reject)))
   },
-  setCurrentJob: (payload) => dispatch(Actions.setCurrentJob(payload)),
   getCancelEstimateRequest: (payload) => new Promise((resolve, reject) =>
     dispatch(Actions.getCancelEstimateRequest(payload, resolve, reject))),
   shareItinerary: (payload) => new Promise((resolve, reject) =>

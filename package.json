@@ -1,5 +1,5 @@
 {
-  "name": "Customer",
+  "name": "jonnyOnItCustomer",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -34,26 +34,25 @@
     "lodash": "4.17.4",
     "moment": "2.20.1",
     "moment-timezone": "0.5.14",
-    "native-base": "2.7.0",
+    "native-base": "2.3.3",
     "phone": "^2.0.0-rc.1",
     "prop-types": "15.6.0",
     "querystringify": "0.0.4",
     "ramda": "0.24.1",
     "react": "16.4.1",
-    "react-native": "0.56.0",
+    "react-native": "0.55.0",
     "react-native-animatable": "1.2.4",
     "react-native-awesome-card-io": "0.7.0",
-    "react-native-camera": "0.12.0",
+    "react-native-camera": "0.13.0",
     "react-native-check-box": "2.1.0",
     "react-native-checkout": "0.0.7",
     "react-native-config": "0.6.1",
     "react-native-datepicker": "1.6.0",
     "react-native-drawer": "2.5.0",
-    "react-native-iphone-x-helper": "^1.0.3",
     "react-native-modal-dropdown": "0.6.2",
     "react-native-phone-call": "1.0.4",
     "react-native-push-notification": "3.0.2",
-    "react-native-scrollable-tab-view": "https://github.com/skv-headless/react-native-scrollable-tab-view.git",
+    "react-native-scrollable-tab-view": "0.8.0",
     "react-native-sentry": "0.35.3",
     "react-native-simple-radio-button": "2.7.0",
     "react-native-stripe-api": "0.1.0",
@@ -73,31 +72,52 @@
     "yarn": "1.3.2"
   },
   "devDependencies": {
-    "@storybook/addon-storyshots": "3.2.3",
-    "@storybook/react-native": "3.2.3",
+    "@babel/core": "7.0.0-beta.54",
+    "@storybook/addon-storyshots": "3.4.8",
+    "@storybook/react-native": "3.4.8",
+    "babel-core": "6.26.3",
     "babel-eslint": "7.1.1",
-    "babel-jest": "21.2.0",
+    "babel-jest": "23.4.0",
+    "babel-plugin-ignite-ignore-reactotron": "0.3.0",
     "babel-preset-es2015": "6.18.0",
-    "babel-preset-react-native": "5.0.2",
-    "enzyme": "2.6.0",
+    "babel-preset-react-native": "3.0.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
     "husky": "0.13.1",
     "ignite-animatable": "1.0.0",
     "ignite-ir-boilerplate": "2.2.2",
     "ignite-standard": "1.0.0",
     "ignite-vector-icons": "1.1.0",
-    "jest": "^23.2.0",
+    "jest": "23.0.0",
+    "jest-enzyme": "^6.0.2",
     "jest-junit": "^5.0.0",
+    "jest-serializer-enzyme": "^1.0.0",
     "mockery": "2.0.0",
     "node-plop": "0.9.0",
     "plop": "1.9.0",
-    "react-addons-test-utils": "~15.4.1",
+    "react-addons-test-utils": "16.4.1",
     "react-devtools": "2.5.2",
-    "react-dom": "16.0.0-alpha.12",
-    "react-test-renderer": "16.0.0-beta.5",
+    "react-dom": "16.4.1",
+    "react-jsdom": "^2.0.5",
+    "react-native-mock": "0.2.9",
+    "react-native-mock-render": "0.0.2",
+    "react-test-renderer": "16.4.1",
+    "reactotron-react-native": "1.12.0",
+    "reactotron-redux": "1.11.1",
+    "reactotron-redux-saga": "1.11.1",
+    "redux-mock-store": "^1.5.3",
+    "redux-thunk": "^2.3.0",
     "snazzy": "7.0.0",
     "standard": "10.0.2"
   },
   "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "!node_modules/react-runtime"
+    ],
     "testMatch": [
       "**/Tests/**/*.js",
       "**/?(*.)(spec|test).js?(x)"
@@ -113,10 +133,7 @@
     "reporters": [
       "default",
       "jest-junit"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-    }
+    ]
   },
   "jest-junit": {
     "output": "test-reports/junit.xml"

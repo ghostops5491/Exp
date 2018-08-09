@@ -1,7 +1,6 @@
-import AddressActions from './AddressRedux'
 import AuthActions from './AuthRedux'
+import AddressActions from './AddressRedux'
 import ContractorActions from './ContractorRedux'
-import InvoiceActions from './InvoiceRedux'
 import JobActions from './JobRedux'
 import NotificationActions from './NotificationRedux'
 import PaymentsActions from './PaymentsRedux'
@@ -12,10 +11,9 @@ import StartupActions from './StartupRedux'
 // ADD_IMPORT
 
 export default {
-  ...AddressActions,
   ...AuthActions,
+  ...AddressActions,
   ...ContractorActions,
-  ...InvoiceActions,
   ...JobActions,
   ...NotificationActions,
   ...PaymentsActions,

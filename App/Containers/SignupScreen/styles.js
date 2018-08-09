@@ -32,7 +32,7 @@ export default StyleSheet.create({
     borderColor: Colors.grayFive,
     width: '100%',
     height: getResponsiveCSSFrom8(44).height,
-    lineHeight: getResponsiveCSSFrom8(18).height,
+   fontSize: getResponsiveCSSFrom8(12).width,
    fontSize: getResponsiveCSSFrom8(14).width,
     fontWeight: "400",
     fontFamily: Fonts.type.montserrat,
@@ -80,10 +80,5 @@ export default StyleSheet.create({
     marginBottom: 5,
   	textAlign: "center",
   	color: Colors.warmGreyTwo,
-  },
-  rightIcon: {
-    position: 'absolute',
-    right: getResponsiveCSSFrom8(0).width,
-    marginTop: getResponsiveCSSFrom8(6).height
   }
 })

@@ -106,16 +106,11 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 // Define VersionName & VersionCode using git-tag and BUILD_NUMBER from Jenkins
-// def tag = System.getenv("TAG_REF") ?: "1.0.0"
-// def (versionMajor, versionMinor, versionPatch) = tag.tokenize('.')
-// def versionBuild = System.getenv("BUILD_NUMBER") as Integer ?: 9999
-// def VERSION_NAME = "$versionMajor.$versionMinor.$versionPatch.$versionBuild"
-// def VERSION_CODE = versionMajor.toInteger() * 10000 + versionMinor.toInteger() * 1000 + versionPatch.toInteger() * 100 + versionBuild.toInteger()
-def tag = System.getenv("TAG_REF") ?: "1.0"
-def (versionMajor, versionMinor) = tag.tokenize('.')
+def tag = System.getenv("TAG_REF") ?: "1.0.0"
+def (versionMajor, versionMinor, versionPatch) = tag.tokenize('.')
 def versionBuild = System.getenv("BUILD_NUMBER") as Integer ?: 9999
-def VERSION_NAME = "$versionMajor.$versionMinor.$versionBuild"
-def VERSION_CODE = versionMajor.toInteger() * 10000 + versionMinor.toInteger() * 1000 + versionBuild.toInteger()
+def VERSION_NAME = "$versionMajor.$versionMinor.$versionPatch.$versionBuild"
+def VERSION_CODE = versionMajor.toInteger() * 10000 + versionMinor.toInteger() * 1000 + versionPatch.toInteger() * 100 + versionBuild.toInteger()
 
 android {
     compileSdkVersion 26

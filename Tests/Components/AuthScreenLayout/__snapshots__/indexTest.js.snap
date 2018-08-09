@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test the AuthScreenLayout 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    scrollEnabled={false}
+    style={
+      Object {
+        "flex": 1,
+        "marginBottom": 0,
+      }
+    }
+  >
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+              "height": 1334,
+            },
+            Object {
+              "maxHeight": 1334,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 0.3,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../App/Images/loginScreen.png",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 0.7,
+              "padding": 10,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "stretch",
+                "height": 180,
+                "justifyContent": "center",
+                "marginHorizontal": 40,
+                "paddingVertical": 40,
+              }
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../App/Images/primaryLogo.png",
+                }
+              }
+              style={
+                Object {
+                  "height": 160,
+                  "marginHorizontal": 40,
+                  "resizeMode": "contain",
+                  "width": 560,
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

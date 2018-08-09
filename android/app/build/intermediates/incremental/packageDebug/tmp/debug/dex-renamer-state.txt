@@ -1,0 +1,4 @@
+#Fri Jul 20 01:45:11 IST 2018
+base.0=/Users/mypc/Desktop/JOI/Customer/android/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+path.0=classes.dex

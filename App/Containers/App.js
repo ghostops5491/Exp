@@ -2,7 +2,7 @@ import 'App/Config'
 import DebugConfig from 'App/Config/DebugConfig'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { View, Platform, SafeAreaView } from 'react-native'
+import { View, Platform } from 'react-native'
 import { Text } from 'native-base'
 import RootContainer from './RootContainer'
 import store from 'App/Redux'
@@ -30,13 +30,15 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <SafeAreaView
+        <View
           style={{
             flex: 1,
-            backgroundColor: '#fcfcfc',
             ...Platform.select({
-              ios: {
-                marginTop: -20
+              android: {
+                marginBottom:
+                  Platform.Version >= 14
+                    ? getResponsiveCSSFrom8(50).height
+                    : null
               }
             })
           }}
@@ -45,10 +47,11 @@ class App extends Component {
           { DebugConfig.stagingBuild &&
             <Text style={{textAlign: 'center', color: '#ef6940'}}>STAGING BUILD</Text>
           }
-        </SafeAreaView>
+        </View>
       </Provider>
     )
   }
 }
 
-export default App
+// allow reactotron overlay for fast design in dev mode
+export default (DebugConfig.useReactotron ? console.tron.overlay(App) : App)

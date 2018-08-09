@@ -18,8 +18,6 @@ class QuoteConfirmScreen extends Component {
 
   componentWillMount() {
     this.props.fetchNotifications()
-    let { currentJobId } = this.props
-    this.props.fetchInvoice(currentJobId)
   }
 
   acceptQuote = () => {
@@ -86,9 +84,6 @@ class QuoteConfirmScreen extends Component {
       )
     }
 
-    let quoteAmount = 0;
-    this.props.invoice.forEach(invoiceItem => quoteAmount += Number(invoiceItem.amount*invoiceItem.quantity))
-
     const contractor = currentJob.contractor
 
     return (
@@ -119,25 +114,32 @@ class QuoteConfirmScreen extends Component {
             </View>
           </View>
           <View style={styles.materialsTable}>
-            { this.props.invoice.map((invoiceItem) => {
-              return (
-                <View style={styles.materialRow}>
-                  <Text style={styles.materialName}>
-                    {invoiceItem.label}
-                  </Text>
-                  <Text style={styles.materialCost}>
-                   ${(invoiceItem.amount*invoiceItem.quantity).toFixed(2)}
-                  </Text>
-                </View>
-              )
-            })}
-            <View style={styles.ruler}></View>
+            <View style={styles.materialRow}>
+              <Text style={styles.materialName}>
+                Materials Quote
+              </Text>
+              <Text style={styles.materialCost}>
+               ${currentJob.materials_estimate_cost.toFixed(2)}
+              </Text>
+            </View>
+            <View style={styles.materialRow}>
+              <Text style={styles.materialName}>
+                Labor Quote
+              </Text>
+              <Text style={styles.materialCost}>
+                ${currentJob.labor_estimate.toFixed(2)}
+              </Text>
+
+            </View>
+            <View style={styles.ruler}>
+
+            </View>
             <View style={styles.materialRow}>
               <Text style={styles.materialName}>
                 Total
               </Text>
               <Text style={[styles.materialCost, {fontFamily: 'Roboto-Bold'}]}>
-                ${quoteAmount.toFixed(2)}
+              ${(currentJob.materials_estimate_cost + currentJob.labor_estimate).toFixed(2)}
               </Text>
             </View>
 
@@ -165,14 +167,11 @@ class QuoteConfirmScreen extends Component {
 const mapStateToProps = createStructuredSelector({
   allJobs: (state) => get(state, 'job.allJobs'),
   currentJobId: (state) => get(state, 'job.currentJobId'),
-  invoice: (state) => get(state, 'invoice.current'),
   notifications: (state) => get(state, 'notification.allNotifications'),
   currentNotification: (state) => get(state, 'notification.currentNotification'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchInvoice: (currentJobId) => new Promise((resolve, reject) =>
-    dispatch(Actions.fetchInvoiceRequest(currentJobId, resolve, reject))),
   respondQuote: (serviceRequest) => new Promise((resolve, reject) =>
     dispatch(Actions.acceptQuoteRequest(serviceRequest, resolve, reject))),
   deleteNotification: (payload) =>  new Promise((resolve, reject) =>

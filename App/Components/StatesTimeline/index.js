@@ -77,7 +77,6 @@ export default function StatesTimeline(props) {
           activeIndex={activeIndex}
           index={index}
           job={props.job}
-          invoice={props.invoice}
         />
       ))}
       {map(nextStates, (state) => (

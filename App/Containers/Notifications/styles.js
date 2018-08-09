@@ -5,7 +5,8 @@ import { getResponsiveCSSFrom8 } from '../../Lib/Utils';
 export default StyleSheet.create({
   container: {
     backgroundColor: Colors.grayThree,
-    flex: 1
+    flex: 1,
+   paddingBottom: getResponsiveCSSFrom8(15).height,
   },
   header: {
    borderBottomWidth: getResponsiveCSSFrom8(1).width,

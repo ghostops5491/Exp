@@ -4,9 +4,10 @@ import { isEmpty } from 'lodash'
 import { map } from 'App/Lib/lodash'
 import Config from 'react-native-config'
 
-  // our "constructor"
-  const create = (baseURL = Config.API_URL) => {
-
+// our "constructor"
+// const create = (baseURL = 'https://finch.joi-api.staging.c66.me/api/v1/') => {
+  // const create = (baseURL = 'https://crocodile.joi-api.c66.me/api/v1/') => {
+  const create = (baseURL = 'https://finch.joi-api.staging.c66.me/api/v1/') => {
   // ------
   // STEP 1
   // ------
@@ -74,9 +75,6 @@ import Config from 'react-native-config'
 
   const fetchJobs = (token, job_statuses) =>
     api.get('jobs', {job_statuses}, {headers: {Authorization: token}})
-
-  const fetchInvoiceRequest = (token, jobId) =>
-    api.get(`jobs/${jobId}/invoice`, { }, { headers: { Authorization: token } })
 
   const verifyToken = token =>
     api.get('users/verify_token', {}, {headers: {Authorization: token}})
@@ -306,7 +304,6 @@ import Config from 'react-native-config'
     updateJobStateRequest,
     updateUser,
     fetchJobRequest,
-    fetchInvoiceRequest,
     uploadPhotoRequest,
     fetchPreferredContractorsRequest,
     addPreferredContractorRequest,

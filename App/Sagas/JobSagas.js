@@ -121,6 +121,7 @@ function * makeShareTimelineItineraryRequest(api, action) {
    }
 
 }
+
 // ADD_SAGA_ACTION
 
 export default {

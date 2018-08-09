@@ -14,18 +14,9 @@ export default StyleSheet.create({
    marginBottom: getResponsiveCSSFrom8(8).height,
    marginTop: getResponsiveCSSFrom8(40).height,
   },
-  invoiceButton: {
-    backgroundColor: Colors.midBlue,
-    color: '#fff',
-    fontSize: getResponsiveCSSFrom8(14).width,
-    height: getResponsiveCSSFrom8(35).height,
-    margin: getResponsiveCSSFrom8(20).height,
-    padding: getResponsiveCSSFrom8(10).height,
-    textAlign: 'center',
-  },
   cancellationMessage: {
     color: Colors.dustyOrange,
-    fontSize: getResponsiveCSSFrom8(10).width,
+   fontSize: getResponsiveCSSFrom8(10).width,
     textAlign: 'center',
   },
   shareButton:  {

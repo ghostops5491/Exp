@@ -32,31 +32,32 @@ class JobState extends Component {
   }
 
   renderQuoteDropdown() {
-    const { job, invoice } = this.props
-    let quoteAmount = 0;
-    invoice.forEach(invoiceItem => quoteAmount += Number(invoiceItem.amount*invoiceItem.quantity))
-
+    const { labor_estimate, materials_estimate_cost } = this.props.job
+    const total = parseFloat(materials_estimate_cost) + parseFloat(labor_estimate)
     return(
       <View style={styles.quoteDropdown}>
-        { this.props.invoice.map((invoiceItem) => {
-          return (
-            <View style={styles.quoteDropdownRow}>
-              <View style={{flex: 2}}>
-                <Text style={styles.quoteDropdownLabel}>{invoiceItem.item_type}</Text>
-              </View>
-              <View style={{flex: 1}}>
-                <Text style={styles.quoteDropdownValue}>${(invoiceItem.amount*invoiceItem.quantity).toFixed(2)}</Text>
-              </View>
-            </View>
-          )
-        })}
-
+        <View style={styles.quoteDropdownRow}>
+          <View style={{flex: 2}}>
+            <Text style={styles.quoteDropdownLabel}>Labour</Text>
+          </View>
+          <View style={{flex: 1}}>
+            <Text style={styles.quoteDropdownValue}>${labor_estimate.toFixed(2)}</Text>
+          </View>
+        </View>
+        <View style={styles.quoteDropdownRow}>
+          <View style={{flex: 2}}>
+            <Text style={styles.quoteDropdownLabel}>Materials</Text>
+          </View>
+          <View style={{flex: 1}}>
+            <Text style={styles.quoteDropdownValue}>${materials_estimate_cost.toFixed(2)}</Text>
+          </View>
+        </View>
         <View style={styles.quoteDropdownRow}>
           <View style={{flex: 2}}>
             <Text style={styles.quoteDropdownLabel}>Total</Text>
           </View>
           <View style={{flex: 1}}>
-            <Text style={styles.quoteDropdownValue}>${quoteAmount.toFixed(2)}</Text>
+            <Text style={styles.quoteDropdownValue}>${total.toFixed(2)}</Text>
           </View>
         </View>
       </View>

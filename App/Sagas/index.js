@@ -9,31 +9,31 @@ import ActionTypes from 'App/Redux/ActionTypes'
 
 /* ------------- Sagas ------------- */
 
-import AddressSagas from './AddressSagas'
-import AuthSagas from './AuthSagas'
-import ContractorSagas from './ContractorSagas'
-import InvoiceSagas from './InvoiceSagas'
-import JobSagas from './JobSagas'
-import NotificationSagas from './NotificationSagas'
-import PaymentsSagas from './PaymentsSagas'
-import ProblemCategorySagas from './ProblemCategorySagas'
-import ProblemSagas from './ProblemSagas'
-import ServiceRequestSagas from './ServiceRequestSagas'
 import StartupSagas from './StartupSagas'
+import GithubSagas  from './GithubSagas'
+import AuthSagas    from './AuthSagas'
+import JobSagas     from './JobSagas'
+import ProblemSagas     from './ProblemSagas'
+import ProblemCategorySagas     from './ProblemCategorySagas'
+import ServiceRequestSagas     from './ServiceRequestSagas'
+import AddressSagas     from './AddressSagas'
+import NotificationSagas     from './NotificationSagas'
+import ContractorSagas     from './ContractorSagas'
+import PaymentsSagas     from './PaymentsSagas'
 // IMPORT_SAGAS
 
 const Sagas = {
-  ...AddressSagas,
-  ...AuthSagas,
-  ...ContractorSagas,
-  ...InvoiceSagas,
-  ...JobSagas,
-  ...NotificationSagas,
-  ...PaymentsSagas,
-  ...ProblemCategorySagas,
-  ...ProblemSagas,
-  ...ServiceRequestSagas,
   ...StartupSagas,
+  ...GithubSagas,
+  ...AuthSagas,
+  ...JobSagas,
+  ...ProblemSagas,
+  ...ProblemCategorySagas,
+  ...ServiceRequestSagas,
+  ...AddressSagas,
+  ...NotificationSagas,
+  ...ContractorSagas,
+  ...PaymentsSagas,
   // SPREAD_SAGAS
 }
 
@@ -48,13 +48,16 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
 
   yield all([
+    // some sagas only receive an action
+    takeLatest(ActionTypes.STARTUP, Sagas.startup),
+
     // some sagas receive extra parameters in addition to an action
+    takeLatest(ActionTypes.USER_REQUEST, Sagas.getUserAvatar, api),
     takeLatest(ActionTypes.LOGIN_REQUEST, Sagas.makeLoginRequest, api),
     takeLatest(ActionTypes.VERIFY_TOKEN_REQUEST, Sagas.makeVerifyTokenRequest, api),
     takeLatest(ActionTypes.SIGNUP_REQUEST, Sagas.makeSignupRequest, api),
     takeLatest(ActionTypes.FORGOT_PASSWORD_REQUEST, Sagas.makeForgotPasswordRequest, api),
     takeLatest(ActionTypes.SIGNOUT_REQUEST, Sagas.makeSignoutRequest, api),
-    takeLatest(ActionTypes.FETCH_INVOICE_REQUEST, Sagas.makeFetchInvoiceRequest, api),
     takeLatest(ActionTypes.FETCH_JOBS_REQUEST, Sagas.makeFetchJobsRequest, api),
     takeLatest(ActionTypes.FETCH_PROBLEMS_REQUEST, Sagas.makeFetchProblemsRequest, api),
     takeLatest(ActionTypes.FETCH_PROBLEM_CATEGORIES_REQUEST, Sagas.makeFetchProblemCategoriesRequest, api),

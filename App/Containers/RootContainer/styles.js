@@ -1,14 +1,11 @@
 import {StyleSheet} from 'react-native'
 import {Fonts, Metrics, Colors} from 'App/Themes'
+
 import { getResponsiveCSSFrom8 } from 'App/Lib/Utils'
-import { ifIphoneX } from 'react-native-iphone-x-helper'
 
 export default StyleSheet.create({
   applicationView: {
-    flex: 1,
-    ...ifIphoneX({
-      marginTop: -40
-    })
+    flex: 1
   },
   container: {
     flex: 1,
