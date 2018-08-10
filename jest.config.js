@@ -36,7 +36,7 @@ const JEST_CONFIG = {
 
     /** Where to collect coverage from */
     collectCoverageFrom : [
-        "<rootDir>/App"
+        "<rootDir>/App/**/*.js"
     ],
 
     /** Where to store coverage */
