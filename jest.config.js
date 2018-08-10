@@ -6,6 +6,23 @@
  * Configuration Reference - https://jestjs.io/docs/en/configuration
  */
 
+const TRANSFORM_WHITELIST = [
+    "react-native",
+    "react-navigation",
+    "native-base-shoutem-theme",
+    "react-native-easy-grid",
+    "react-native-drawer",
+    "native-base",
+    "react-native-vector-icons",
+    "react-native-keyboard-aware-scroll-view",
+    "react-native-iphone-x-helper",
+    "react-native-phone-call",
+    "react-native-camera",
+    "react-native-easy-grid",
+    "react-native-awesome-card-io",
+    "react-native-check-box"
+]
+
 const JEST_CONFIG = {
 
     /** Detailed output of every test run */
@@ -30,7 +47,7 @@ const JEST_CONFIG = {
 
     /** Using this we stub out our static resources */
     moduleNameMapper : {
-        "^[./a-zA-Z0-9$_-]+\\.(png|jpg|jpeg)" : "Stub-Image"
+        "^[./a-zA-Z0-9$_-]+\\.(png|jpg|jpeg)" : "<rootDir>/__mocks__/static-stub.js"
     },
 
     /** 
@@ -40,7 +57,9 @@ const JEST_CONFIG = {
     preset : "react-native",
 
     /** Set of files-configuration that will be run before each test */
-    setupFiles : [],
+    setupFiles : [
+        "<rootDir>/jest.pretest.js"
+    ],
 
     /** File to run right after setupFiles but before each test */
     setupTestFrameworkScriptFile : "",
@@ -58,8 +77,13 @@ const JEST_CONFIG = {
      * and integration tests in folder named integration
      * */
     testMatch : [
-        "**/unit/**/*.js"
+        "**/unit/**/*.test.js"
     ],
+
+    /** Modules/Files that will be transformed */
+    transform: {
+        "^.+\\.js$": "babel-jest",
+    },
 
     /**
      * This will contain list of modules which needs to be either
@@ -72,8 +96,7 @@ const JEST_CONFIG = {
      * Example : https://jestjs.io/docs/en/tutorial-react-native#transformignorepatterns-customization
      */
     transformIgnorePatterns : [
-        /** This won't be transformed by default */
-        "/node_modules/"
+        "node_modules/(?!("+ TRANSFORM_WHITELIST.join( "|" ) +")/)"
     ]
 };
 

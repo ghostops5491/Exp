@@ -1,6 +1,12 @@
 {
     "presets": [
         "env",
-        "react"
+        "stage-0",
+        "stage-1",
+        "es2015",
+        "react-native"
+    ],
+    "plugins": [
+        "transform-es2015-modules-commonjs"
     ]
 }
