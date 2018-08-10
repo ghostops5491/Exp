@@ -11,7 +11,7 @@ import Actions from 'App/Redux/Actions'
 import { Colors } from 'App/Themes'
 import styles from './styles'
 
-class SignupScreen extends Component {
+export class SignupScreen extends Component {
   static propTypes = {
     clearError: PropTypes.func.isRequired,
     addError: PropTypes.func.isRequired,

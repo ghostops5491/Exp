@@ -1,0 +1,250 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@method constructor component state should match snapshot until changed explicitly 1`] = `
+Object {
+  "hidePassword1": true,
+  "hidePassword2": true,
+  "termsConditionsModalVisible": false,
+}
+`;
+
+exports[`ui should match snapshot if not altered 1`] = `
+<AuthScreenLayout>
+  <Component>
+    <Component
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Component
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
+      >
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        />
+      </Component>
+      <Component>
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        >
+          Currently only serving the Atlanta, GA, metro area
+        </mockConstructor>
+      </Component>
+      <mockConstructor>
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        >
+          <Component
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+          >
+            <RenderIcon
+              name="username"
+            />
+          </Component>
+          <mockConstructor
+            autoCapitalize="none"
+            keyboardType="email-address"
+            onChangeText={[Function]}
+            placeholder="Email"
+            style={
+              Array [
+                Object {
+                  "marginBottom": 10,
+                },
+                false,
+              ]
+            }
+            value=""
+          />
+        </mockConstructor>
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        >
+          <Component
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+          >
+            <RenderIcon
+              name="password"
+            />
+          </Component>
+          <mockConstructor
+            onChangeText={[Function]}
+            placeholder="Password"
+            secureTextEntry={true}
+            style={
+              Array [
+                Object {
+                  "marginBottom": 10,
+                },
+                false,
+              ]
+            }
+            value=""
+          />
+          <mockConstructor
+            onPress={[Function]}
+            primary={true}
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+            transparent={true}
+          >
+            <mockConstructor
+              name="eye"
+            />
+          </mockConstructor>
+        </mockConstructor>
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        >
+          <Component
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+          >
+            <RenderIcon
+              name="password"
+            />
+          </Component>
+          <mockConstructor
+            onChangeText={[Function]}
+            placeholder="Password Confirmation"
+            secureTextEntry={true}
+            style={
+              Array [
+                Object {
+                  "marginBottom": 10,
+                },
+                false,
+              ]
+            }
+            value=""
+          />
+          <mockConstructor
+            onPress={[Function]}
+            primary={true}
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+            transparent={true}
+          >
+            <mockConstructor
+              name="eye"
+            />
+          </mockConstructor>
+        </mockConstructor>
+        <Component
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        />
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        >
+          <mockConstructor
+            onPress={[Function]}
+            primary={true}
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+          >
+            <mockConstructor
+              style={
+                Object {
+                  "marginBottom": 10,
+                }
+              }
+            >
+               SIGN UP 
+            </mockConstructor>
+          </mockConstructor>
+        </mockConstructor>
+      </mockConstructor>
+      <Component
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
+      >
+        <mockConstructor
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
+        >
+          Already have account?
+        </mockConstructor>
+        <Component
+          onPress={[Function]}
+        >
+          <mockConstructor
+            style={
+              Object {
+                "marginBottom": 10,
+              }
+            }
+          >
+            Log In!
+          </mockConstructor>
+        </Component>
+      </Component>
+    </Component>
+    <TermsConditionsModal
+      acceptTerms={[Function]}
+      declineTerms={[Function]}
+      showAcceptDeclineButtons={true}
+      visible={false}
+    />
+  </Component>
+</AuthScreenLayout>
+`;
