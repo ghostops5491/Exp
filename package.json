@@ -33,7 +33,7 @@
     "format-json": "1.0.3",
     "lodash": "4.17.4",
     "moment": "2.20.1",
-    "moment-timezone": "0.5.14",
+    "moment-timezone": "0.5.35",
     "native-base": "2.7.0",
     "phone": "^2.0.0-rc.1",
     "prop-types": "15.6.0",
